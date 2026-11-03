@@ -1,3 +1,4 @@
+
 package com.employee.management.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,24 @@ import com.employee.management.repository.UserRepository;
 @Component
 public class AdminUserInitializer implements CommandLineRunner {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-		if (userRepository.findByUsername("admin").isEmpty()) {
+        User admin = userRepository.findByUsername("admin")
+                .orElseGet(User::new);
 
-			User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(passwordEncoder.encode("Admin@123"));
+        admin.setRole("ADMIN");
 
-			admin.setUsername("admin");
-			admin.setPassword(passwordEncoder.encode("Admin@123"));
-			admin.setRole("ADMIN");
+        userRepository.save(admin);
 
-			userRepository.save(admin);
-
-			System.out.println("Admin account created successfully!");
-
-		} else {
-			System.out.println("Admin account already exists!");
-		}
-	}
-
+        System.out.println("Admin password initialized successfully!");
+    }
 }
