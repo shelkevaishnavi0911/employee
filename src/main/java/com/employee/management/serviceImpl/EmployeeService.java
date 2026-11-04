@@ -15,31 +15,31 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    // Register Employee
+    
     public Employee registerEmployee(Employee employee) {
         employee.setStatus("PENDING");
         return employeeRepository.save(employee);
     }
 
-    // Get All Employees
+  
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    // Get Employee By ID
+  
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() ->
                     new RuntimeException("Employee not found"));
     }
 
-    // Get Employee Application Status
+    
     public String getApplicationStatus(Long id) {
         Employee employee = getEmployeeById(id);
         return employee.getStatus();
     }
 
-    // Accept Employee
+    
     public Employee acceptEmployee(Long id) {
         Employee employee = getEmployeeById(id);
         employee.setStatus("ACCEPTED");
@@ -48,7 +48,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    // Reject Employee
+    
     public Employee rejectEmployee(Long id, String reason) {
         Employee employee = getEmployeeById(id);
         employee.setStatus("REJECTED");

@@ -24,7 +24,7 @@ public class AdminController {
     @Autowired
     private EmployeeService employeeService;
 
-    // Admin Dashboard
+    
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
 

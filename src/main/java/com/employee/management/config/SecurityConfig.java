@@ -31,12 +31,12 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
 
-            		 // Allow internal JSP forwards and error dispatches
+            		
             	    .dispatcherTypeMatchers(
             	        DispatcherType.FORWARD,
             	        DispatcherType.ERROR
             	    ).permitAll()
-                // Public pages
+                
                 .requestMatchers(
                     "/admin/login",
                     "/employee/register",

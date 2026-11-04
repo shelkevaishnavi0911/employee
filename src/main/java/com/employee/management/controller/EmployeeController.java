@@ -30,7 +30,7 @@ public class EmployeeController {
 
     @Autowired
     private FileStorageService fileStorageService;
-    // Open Registration Form
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
 
@@ -38,9 +38,6 @@ public class EmployeeController {
 
         return "employee/registration";
     }
-
-    // Submit Registration Form
-
 
 
     @PostMapping("/register")

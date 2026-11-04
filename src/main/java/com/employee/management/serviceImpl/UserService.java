@@ -16,17 +16,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // Find User By Username
+   
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    // Save User
+    
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    // Find User By ID
+    
     public User getUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() ->
