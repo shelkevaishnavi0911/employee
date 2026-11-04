@@ -41,6 +41,7 @@ public class SecurityConfig {
                     "/admin/login",
                     "/employee/register",
                     "/employee/status",
+                    "/health",
                     "/css/**",
                     "/js/**",
                     "/images/**",
