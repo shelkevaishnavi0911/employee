@@ -10,6 +10,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.employee.management.exception.InvalidPhotoException;
+
 @Service
 public class FileStorageService {
 	
@@ -22,7 +24,7 @@ public class FileStorageService {
     public String savePhoto(MultipartFile photo) throws IOException {
 
         if (photo == null || photo.isEmpty()) {
-            throw new IllegalArgumentException("Please upload a photo");
+        	throw new InvalidPhotoException("Please upload a photo");
         }
 
         String originalName = photo.getOriginalFilename();

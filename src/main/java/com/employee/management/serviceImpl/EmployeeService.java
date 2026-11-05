@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employee.management.entity.Employee;
+import com.employee.management.exception.EmployeeNotFoundException;
 import com.employee.management.repository.EmployeeRepository;
 
 @Service
@@ -30,7 +31,9 @@ public class EmployeeService {
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() ->
-                    new RuntimeException("Employee not found"));
+                    new EmployeeNotFoundException(
+                            "Employee not found with ID: " + id
+                          ));
     }
 
     

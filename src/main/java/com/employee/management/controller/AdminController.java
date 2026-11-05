@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.entity.Employee;
 import com.employee.management.serviceImpl.EmployeeService;
+import com.employee.management.serviceImpl.UserService;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -23,6 +26,9 @@ public class AdminController {
 
     @Autowired
     private EmployeeService employeeService;
+    
+    @Autowired
+    private UserService userService;
 
     
 //    @GetMapping("/dashboard")
@@ -177,4 +183,27 @@ public String rejectedEmployees(Model model) {
 //
 //    return "redirect:/admin/dashboard";
 //}
+
+
+@GetMapping("/create-admin")
+public String showCreateAdminPage() {
+    return "admin/create-admin";
+}
+
+@PostMapping("/create-admin")
+public String createAdmin(
+        @RequestParam String username,
+        @RequestParam String password,
+        RedirectAttributes redirectAttributes) {
+
+    try {
+        userService.createAdmin(username, password);
+        redirectAttributes.addFlashAttribute(
+                "success", "New admin created successfully!");
+    } catch (RuntimeException e) {
+        redirectAttributes.addFlashAttribute("error", e.getMessage());
+    }
+
+    return "redirect:/admin/create-admin";
+}
 }

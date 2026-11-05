@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 import com.employee.management.entity.Employee;
+import com.employee.management.exception.InvalidPhotoException;
 import com.employee.management.serviceImpl.EmployeeService;
 import com.employee.management.serviceImpl.FileStorageService;
 
@@ -71,7 +72,7 @@ public class EmployeeController {
 
             return "redirect:/employee/status?id=" + savedEmployee.getId();
 
-        } catch (IOException | IllegalArgumentException e) {
+        } catch (IOException | InvalidPhotoException  e) {
             model.addAttribute("error", e.getMessage());
             return "employee/registration";
         }

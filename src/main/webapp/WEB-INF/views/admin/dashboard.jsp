@@ -271,7 +271,13 @@
             <a href="${pageContext.request.contextPath}/admin/rejected">
                 View Rejected Applications
             </a>
+			
+			<a href="${pageContext.request.contextPath}/admin/create-admin">
+					    Create New Admin
+					</a>
         </div>
+		
+		
 
     </main>
 
