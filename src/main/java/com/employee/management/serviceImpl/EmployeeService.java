@@ -79,5 +79,9 @@ public Employee reconsiderEmployee(Long id) {
 
     return employeeRepository.save(employee);
 }
+
+public long countEmployeesByStatus(String status) {
+    return employeeRepository.countByStatus(status);
+}
 }
 

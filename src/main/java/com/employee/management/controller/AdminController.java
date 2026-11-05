@@ -25,24 +25,45 @@ public class AdminController {
     private EmployeeService employeeService;
 
     
+//    @GetMapping("/dashboard")
+//    public String dashboard(Model model) {
+//
+//        List<Employee> employees = employeeService.getAllEmployees();
+//
+//        model.addAttribute("employees", employees);
+//        model.addAttribute("totalPending",
+//                employeeService.getPendingEmployees().size());
+//
+//        model.addAttribute("totalAccepted",
+//                employeeService.getAcceptedEmployees().size());
+//
+//        model.addAttribute("totalRejected",
+//                employeeService.getRejectedEmployees().size());
+//
+//        return "admin/dashboard";
+//    }
+
+    
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
 
-        List<Employee> employees = employeeService.getAllEmployees();
+        model.addAttribute(
+            "totalPending",
+            employeeService.countEmployeesByStatus("PENDING")
+        );
 
-        model.addAttribute("employees", employees);
-        model.addAttribute("totalPending",
-                employeeService.getPendingEmployees().size());
+        model.addAttribute(
+            "totalAccepted",
+            employeeService.countEmployeesByStatus("ACCEPTED")
+        );
 
-        model.addAttribute("totalAccepted",
-                employeeService.getAcceptedEmployees().size());
-
-        model.addAttribute("totalRejected",
-                employeeService.getRejectedEmployees().size());
+        model.addAttribute(
+            "totalRejected",
+            employeeService.countEmployeesByStatus("REJECTED")
+        );
 
         return "admin/dashboard";
     }
-
 //    // Accept Employee
 //    @PostMapping("/accept")
 //    public String acceptEmployee(@RequestParam Long id) {

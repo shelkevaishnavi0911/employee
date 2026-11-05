@@ -11,4 +11,6 @@ import com.employee.management.entity.Employee;
 public interface  EmployeeRepository  extends JpaRepository<Employee, Long> {
 
 	List<Employee> findByStatus(String status);
+	
+	long countByStatus(String status);
 }
